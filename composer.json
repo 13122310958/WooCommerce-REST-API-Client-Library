@@ -11,6 +11,9 @@
             "name": "Gerhard Potgieter"
         }
     ],
+    "autoload": {
+        "psr-4": { "WooThemes\\" : "lib/" }
+    },
     "minimum-stability": "stable",
     "require": {}
 }
