@@ -1,4 +1,7 @@
 <?php
+
+namespace WooThemes\Resources;
+
 /**
  * WC API Client Webhooks resource class
  *

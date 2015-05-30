@@ -1,4 +1,7 @@
 <?php
+
+namespace WooThemes\Resources;
+
 /**
  * WC API Client Products resource class
  *

@@ -1,4 +1,7 @@
 <?php
+
+namespace WooThemes;
+
 /**
  * WC API Client HTTP Request
  *

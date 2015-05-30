@@ -1,4 +1,7 @@
 <?php
+
+namespace WooThemes\Exceptions;
+
 /**
  * WC API Client Exception class
  *
