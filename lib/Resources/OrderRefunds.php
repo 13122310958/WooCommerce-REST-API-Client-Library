@@ -3,42 +3,42 @@
 namespace WooThemes\Resources;
 
 /**
- * WC API Client Order Notes resource class
+ * WC API Client Order Refunds resource class
  *
  * @since 2.0
  */
-class WC_API_Client_Resource_Order_Notes extends WC_API_Client_Resource {
+class OrderRefunds extends Resource {
 
 
 	/**
-	 * Setup the order notes resource
+	 * Setup the order refunds resource
 	 *
 	 * @since 2.0
 	 * @param WC_API_Client $client class instance
 	 */
 	public function __construct( $client ) {
 
-		parent::__construct( 'orders', 'order_note', $client );
+		parent::__construct( 'orders', 'order_refund', $client );
 	}
 
 
 	/**
-	 * Get order notes
+	 * Get order refunds
 	 *
-	 * GET /orders/#{order_id}/notes
-	 * GET /orders/#{order_id}/notes/#{id}
+	 * GET /orders/#{order_id}/refunds
+	 * GET /orders/#{order_id}/refunds/#{id}
 	 *
 	 * @since 2.0
 	 * @param int $order_id order ID
-	 * @param null|int $id order note ID or null to get all order notes
-	 * @param array $args acceptable order endpoint args, like `fields`
-	 * @return array|object orders notes!
+	 * @param null|int $id order refund ID or null to get all order refunds
+	 * @param array $args acceptable order refund endpoint args, like `fields`
+	 * @return array|object order refunds!
 	 */
 	public function get( $order_id, $id = null, $args = array() ) {
 
 		$this->set_request_args( array(
 			'method' => 'GET',
-			'path'   => array( $order_id, 'notes', $id ),
+			'path'   => array( $order_id, 'refunds', $id ),
 			'params' => $args,
 		) );
 
@@ -47,20 +47,20 @@ class WC_API_Client_Resource_Order_Notes extends WC_API_Client_Resource {
 
 
 	/**
-	 * Create an order note
+	 * Create an order refund
 	 *
-	 * POST /orders/#{order_id}/notes
+	 * POST /orders/#{order_id}/refunds
 	 *
 	 * @since 2.0
 	 * @param int $order_id order ID
-	 * @param array $data valid order note data
-	 * @return array|object your newly-created order note
+	 * @param array $data valid order refund data
+	 * @return array|object your newly-created order refund
 	 */
 	public function create( $order_id, $data ) {
 
 		$this->set_request_args( array(
 			'method' => 'POST',
-			'path'   => array( $order_id, 'notes' ),
+			'path'   => array( $order_id, 'refunds' ),
 			'body'   => $data,
 		) );
 
@@ -69,21 +69,21 @@ class WC_API_Client_Resource_Order_Notes extends WC_API_Client_Resource {
 
 
 	/**
-	 * Update an order note
+	 * Update an order refund
 	 *
-	 * PUT /orders/#{order_id}/notes/#{id}
+	 * PUT /orders/#{order_id}/refunds/#{id}
 	 *
 	 * @since 2.0
 	 * @param int $order_id order ID
-	 * @param int $id order note ID
-	 * @param array $data order note data to update
-	 * @return array|object your newly-updated order note
+	 * @param int $id order refund ID
+	 * @param array $data order refund data to update
+	 * @return array|object your newly-updated order refund
 	 */
 	public function update( $order_id, $id, $data ) {
 
 		$this->set_request_args( array(
 			'method' => 'PUT',
-			'path'   => array( $order_id, 'notes', $id ),
+			'path'   => array( $order_id, 'refunds', $id ),
 			'body'   => $data,
 		) );
 
@@ -92,20 +92,20 @@ class WC_API_Client_Resource_Order_Notes extends WC_API_Client_Resource {
 
 
 	/**
-	 * Delete an order note
+	 * Delete an order refund
 	 *
-	 * DELETE /orders/#{order_id}/notes/#{id}
+	 * DELETE /orders/#{order_id}/refunds/#{id}
 	 *
 	 * @since 2.0
 	 * @param int $order_id order ID
-	 * @param int $id order note ID
+	 * @param int $id order refund ID
 	 * @return array|object response
 	 */
 	public function delete( $order_id, $id ) {
 
 		$this->set_request_args( array(
 			'method' => 'DELETE',
-			'path'   => array( $order_id, 'notes', $id ),
+			'path'   => array( $order_id, 'refunds', $id ),
 		) );
 
 		return $this->do_request();

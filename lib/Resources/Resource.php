@@ -6,7 +6,7 @@ namespace WooThemes\Resources;
  *
  * @since 2.0
  */
-abstract class WC_API_Client_Resource {
+abstract class Resource {
 
 
 	/** @var string resource endpoint */

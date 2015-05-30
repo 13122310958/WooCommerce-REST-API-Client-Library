@@ -9,7 +9,7 @@ namespace WooThemes\Exceptions;
  *
  * @since 2.0
  */
-class WC_API_Client_Exception extends Exception {
+class WC_API_Client_Exception extends \Exception {
 
 
 	/**

@@ -7,7 +7,7 @@ namespace WooThemes\Resources;
  *
  * @since 2.0
  */
-class WC_API_Client_Resource_Custom extends WC_API_Client_Resource {
+class Custom extends Resource {
 
 
 	/**

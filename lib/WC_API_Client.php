@@ -1,6 +1,7 @@
 <?php
 
 namespace WooThemes;
+use WooThemes\Exceptions\WC_API_Client_Exception;
 /**
  * WC API Client
  *
@@ -41,34 +42,34 @@ class WC_API_Client {
 
 	/** Resources */
 
-	/** @var WC_API_Client_Resource_Coupons instance */
+	/** @var WooThemes\Resources\Coupons instance */
 	public $coupons;
 
-	/** @var WC_API_Client_Resource_Custom instance */
+	/** @var WooThemes\Resources\Custom instance */
 	public $custom;
 
-	/** @var WC_API_Client_Resource_Customers instance */
+	/** @var WooThemes\Resources\Customers instance */
 	public $customers;
 
-	/** @var WC_API_Client_Resource_Index instance */
+	/** @var WooThemes\Resources\Index instance */
 	public $index;
 
-	/** @var WC_API_Client_Resource_Orders instance */
+	/** @var WooThemes\Resources\Orders instance */
 	public $orders;
 
-	/** @var WC_API_Client_Resource_Order_Notes instance */
+	/** @var WooThemes\Resources\Order_Notes instance */
 	public $order_notes;
 
-	/** @var WC_API_Client_Resource_Order_Refunds instance */
+	/** @var WooThemes\Resources\Order_Refunds instance */
 	public $order_refunds;
 
-	/** @var WC_API_Client_Resource_Products instance */
+	/** @var WooThemes\Resources\Products instance */
 	public $products;
 
-	/** @var WC_API_Client_Resource_Reports instance */
+	/** @var WooThemes\Resources\Reports instance */
 	public $reports;
 
-	/** @var WC_API_Client_Resource_Webhooks instance */
+	/** @var WooThemes\Resources\Webhooks instance */
 	public $webhooks;
 
 
@@ -111,16 +112,16 @@ class WC_API_Client {
 	public function init_resources() {
 
 		$resources = array(
-			'WC_API_Client_Resource_Coupons'       => 'coupons',
-			'WC_API_Client_Resource_Custom'        => 'custom',
-			'WC_API_Client_Resource_Customers'     => 'customers',
-			'WC_API_Client_Resource_Index'         => 'index',
-			'WC_API_Client_Resource_Orders'        => 'orders',
-			'WC_API_Client_Resource_Order_Notes'   => 'order_notes',
-			'WC_API_Client_Resource_Order_Refunds' => 'order_refunds',
-			'WC_API_Client_Resource_Products'      => 'products',
-			'WC_API_Client_Resource_Reports'       => 'reports',
-			'WC_API_Client_Resource_Webhooks'      => 'webhooks',
+			'\\WooThemes\\Resources\\Coupons'       => 'coupons',
+			'\\WooThemes\\Resources\\Custom'        => 'custom',
+			'\\WooThemes\\Resources\\Customers'     => 'customers',
+			'\\WooThemes\\Resources\\Index'         => 'index',
+			'\\WooThemes\\Resources\\Orders'        => 'orders',
+			'\\WooThemes\\Resources\\OrderNotes'   => 'order_notes',
+			'\\WooThemes\\Resources\\OrderRefunds' => 'order_refunds',
+			'\\WooThemes\\Resources\\Products'      => 'products',
+			'\\WooThemes\\Resources\\Reports'       => 'reports',
+			'\\WooThemes\\Resources\\Webhooks'      => 'webhooks',
 		);
 
 		foreach ( $resources as $resource_class => $resource_method ) {
