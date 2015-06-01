@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes\Exceptions;
+namespace WIC\Exceptions;
 
 /**
  * WC API Client HTTP Exception class
@@ -9,7 +9,7 @@ namespace WooThemes\Exceptions;
  *
  * @since 2.0
  */
-class WC_API_Client_HTTP_Exception extends WC_API_Client_Exception {
+class ClientHTTPException extends ClientException {
 
 	/** @var stdClass request array */
 	protected $request;

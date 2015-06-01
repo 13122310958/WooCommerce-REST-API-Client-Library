@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes\Resources;
+namespace WIC\Resources;
 
 /**
  * WC API Client Order Refunds resource class
@@ -14,7 +14,7 @@ class OrderRefunds extends Resource {
 	 * Setup the order refunds resource
 	 *
 	 * @since 2.0
-	 * @param WC_API_Client $client class instance
+	 * @param Client $client class instance
 	 */
 	public function __construct( $client ) {
 

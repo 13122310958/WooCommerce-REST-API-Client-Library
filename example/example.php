@@ -12,7 +12,7 @@ $options = array(
 
 try {
 
-	$client = new WC_API_Client( 'http://your-store-url.com', 'ck_enter_your_consumer_key', 'cs_enter_your_consumer_secret', $options );
+	$client = new Client( 'http://your-store-url.com', 'ck_enter_your_consumer_key', 'cs_enter_your_consumer_secret', $options );
 
 	// coupons
 	//print_r( $client->coupons->get() );
@@ -30,8 +30,8 @@ try {
 	// customers
 	//print_r( $client->customers->get() );
 	//print_r( $client->customers->get( $customer_id ) );
-	//print_r( $client->customers->get_by_email( 'help@woothemes.com' ) );
-	//print_r( $client->customers->create( array( 'email' => 'woothemes@mailinator.com' ) ) );
+	//print_r( $client->customers->get_by_email( 'help@WIC.com' ) );
+	//print_r( $client->customers->create( array( 'email' => 'WIC@mailinator.com' ) ) );
 	//print_r( $client->customers->update( $customer_id, array( 'first_name' => 'John', 'last_name' => 'Galt' ) ) );
 	//print_r( $client->customers->delete( $customer_id ) );
 	//print_r( $client->customers->get_count( array( 'filter[limit]' => '-1' ) ) );
@@ -92,12 +92,12 @@ try {
 	// trigger an error
 	//print_r( $client->orders->get( 0 ) );
 
-} catch ( WC_API_Client_Exception $e ) {
+} catch ( ClientException $e ) {
 
 	echo $e->getMessage() . PHP_EOL;
 	echo $e->getCode() . PHP_EOL;
 
-	if ( $e instanceof WC_API_Client_HTTP_Exception ) {
+	if ( $e instanceof ClientHTTPException ) {
 
 		print_r( $e->get_request() );
 		print_r( $e->get_response() );

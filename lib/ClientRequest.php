@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes;
+namespace WIC;
 
 /**
  * WC API Client HTTP Request
@@ -9,7 +9,7 @@ namespace WooThemes;
  *
  * @since 2.0
  */
-class WC_API_Client_HTTP_Request {
+class ClientRequest {
 
 
 	/** @var resource cURL handle */
@@ -39,12 +39,12 @@ class WC_API_Client_HTTP_Request {
 	 */
 	public function __construct( $args ) {
 
-		$this->request = new stdClass();
+		$this->request = new \stdClass();
 
 		$this->request->headers = array(
 			'Accept: application/json',
 			'Content-Type: application/json',
-			'User-Agent: WooCommerce API Client-PHP/' . WC_API_Client::VERSION,
+			'User-Agent: WooCommerce API Client-PHP/' . Client::VERSION,
 		);
 
 		// GET, POST, PUT, DELETE, etc.
@@ -126,7 +126,7 @@ class WC_API_Client_HTTP_Request {
 	 */
 	protected function get_url_with_auth( $consumer_key, $consumer_secret ) {
 
-		$auth = new WC_API_Client_Authentication( $this->request->url, $consumer_key, $consumer_secret );
+		$auth = new ClientAuthentication( $this->request->url, $consumer_key, $consumer_secret );
 
 		if ( $auth->is_ssl() ) {
 
@@ -152,11 +152,11 @@ class WC_API_Client_HTTP_Request {
 	 *
 	 * @since 2.0
 	 * @return object|array result
-	 * @throws WC_API_Client_HTTP_Exception invalid decoded JSON or any non-HTTP 200/201 response
+	 * @throws ClientHTTPException invalid decoded JSON or any non-HTTP 200/201 response
 	 */
 	public function dispatch() {
 
-		$this->response = new stdClass();
+		$this->response = new \stdClass();
 
 		// blank headers
 		$this->curl_headers = '';
@@ -182,7 +182,7 @@ class WC_API_Client_HTTP_Request {
 		// check for invalid JSON
 		if ( null === $parsed_response ) {
 
-			throw new WC_API_Client_HTTP_Exception( sprintf( 'Invalid JSON returned for %s.', $this->request->url ), $this->response->code, $this->request, $this->response );
+			throw new ClientHTTPException( sprintf( 'Invalid JSON returned for %s.', $this->request->url ), $this->response->code, $this->request, $this->response );
 		}
 
 		// any non-200/201/202 response code indicates an error
@@ -191,7 +191,7 @@ class WC_API_Client_HTTP_Request {
 			// error message/code is nested sometimes
 			list( $error_message, $error_code ) = is_array( $parsed_response->errors ) ? array( $parsed_response->errors[0]->message, $parsed_response->errors[0]->code ) : array( $parsed_response->errors->message, $parsed_response->errors->code );
 
-			throw new WC_API_Client_HTTP_Exception( sprintf( 'Error: %s [%s]', $error_message, $error_code ), $this->response->code, $this->request, $this->response);
+			throw new ClientHTTPException( sprintf( 'Error: %s [%s]', $error_message, $error_code ), $this->response->code, $this->request, $this->response);
 		}
 
 		return $this->build_result( $parsed_response );

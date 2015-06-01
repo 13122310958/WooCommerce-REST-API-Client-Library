@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes;
+namespace WIC;
 
 /**
  * WC API Client Authentication
@@ -9,7 +9,7 @@ namespace WooThemes;
  *
  * @since 2.0
  */
-class WC_API_Client_Authentication {
+class ClientAuthentication {
 
 
 	/** @var string endpoint URL */
@@ -29,7 +29,7 @@ class WC_API_Client_Authentication {
 	 * Setup class
 	 *
 	 * @since 2.0
-	 * @param string $url endpoint URL, e.g. http://www.woothemes,com/wc-api/v2/orders/123
+	 * @param string $url endpoint URL, e.g. http://www.WIC,com/wc-api/v2/orders/123
 	 * @param string $consumer_key
 	 * @param string $consumer_secret
 	 */
@@ -69,7 +69,7 @@ class WC_API_Client_Authentication {
 	/**
 	 * Generate OAuth signature, see server-side method here:
 	 *
-	 * @link https://github.com/woothemes/woocommerce/blob/master/includes/api/class-wc-api-authentication.php#L196-L252
+	 * @link https://github.com/WIC/woocommerce/blob/master/includes/api/class-wc-api-authentication.php#L196-L252
 	 *
 	 * @since 2.0
 	 *
@@ -117,7 +117,7 @@ class WC_API_Client_Authentication {
 	 *
 	 * Modeled after the core method here:
 	 *
-	 * @link https://github.com/woothemes/woocommerce/blob/master/includes/api/class-wc-api-authentication.php#L254-L288
+	 * @link https://github.com/WIC/woocommerce/blob/master/includes/api/class-wc-api-authentication.php#L254-L288
 	 *
 	 * @since 2.0
 	 * @see rawurlencode()

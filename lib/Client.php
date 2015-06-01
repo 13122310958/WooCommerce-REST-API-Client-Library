@@ -1,19 +1,19 @@
 <?php
 
-namespace WooThemes;
-use WooThemes\Exceptions\WC_API_Client_Exception;
+namespace WIC;
+use WIC\Exceptions\ClientException;
 /**
  * WC API Client
  *
  * @since 2.0
  */
-class WC_API_Client {
+class Client {
 
 
 	/** API client version */
 	const VERSION = '2.0.0';
 
-	/** @var string store URL, e.g. http://www.woothemes.com */
+	/** @var string store URL, e.g. http://www.WIC.com */
 	public $store_url;
 
 	/** @var string consumer key */
@@ -22,7 +22,7 @@ class WC_API_Client {
 	/** @var string consumer secret */
 	public $consumer_secret;
 
-	/** @var string API URL, e.g. http://www.woothemes.com/wc-api/v2 */
+	/** @var string API URL, e.g. http://www.WIC.com/wc-api/v2 */
 	public $api_url;
 
 	/** @var bool true if debug is enabled */
@@ -42,34 +42,34 @@ class WC_API_Client {
 
 	/** Resources */
 
-	/** @var WooThemes\Resources\Coupons instance */
+	/** @var WIC\Resources\Coupons instance */
 	public $coupons;
 
-	/** @var WooThemes\Resources\Custom instance */
+	/** @var WIC\Resources\Custom instance */
 	public $custom;
 
-	/** @var WooThemes\Resources\Customers instance */
+	/** @var WIC\Resources\Customers instance */
 	public $customers;
 
-	/** @var WooThemes\Resources\Index instance */
+	/** @var WIC\Resources\Index instance */
 	public $index;
 
-	/** @var WooThemes\Resources\Orders instance */
+	/** @var WIC\Resources\Orders instance */
 	public $orders;
 
-	/** @var WooThemes\Resources\Order_Notes instance */
+	/** @var WIC\Resources\Order_Notes instance */
 	public $order_notes;
 
-	/** @var WooThemes\Resources\Order_Refunds instance */
+	/** @var WIC\Resources\Order_Refunds instance */
 	public $order_refunds;
 
-	/** @var WooThemes\Resources\Products instance */
+	/** @var WIC\Resources\Products instance */
 	public $products;
 
-	/** @var WooThemes\Resources\Reports instance */
+	/** @var WIC\Resources\Reports instance */
 	public $reports;
 
-	/** @var WooThemes\Resources\Webhooks instance */
+	/** @var WIC\Resources\Webhooks instance */
 	public $webhooks;
 
 
@@ -77,7 +77,7 @@ class WC_API_Client {
 	 * Setup the client
 	 *
 	 * @since 2.0
-	 * @param string $store_url store URL, e.g. http://www.woothemes.com
+	 * @param string $store_url store URL, e.g. http://www.WIC.com
 	 * @param string $consumer_key
 	 * @param string $consumer_secret
 	 * @param array $options client options
@@ -112,16 +112,16 @@ class WC_API_Client {
 	public function init_resources() {
 
 		$resources = array(
-			'\\WooThemes\\Resources\\Coupons'       => 'coupons',
-			'\\WooThemes\\Resources\\Custom'        => 'custom',
-			'\\WooThemes\\Resources\\Customers'     => 'customers',
-			'\\WooThemes\\Resources\\Index'         => 'index',
-			'\\WooThemes\\Resources\\Orders'        => 'orders',
-			'\\WooThemes\\Resources\\OrderNotes'   => 'order_notes',
-			'\\WooThemes\\Resources\\OrderRefunds' => 'order_refunds',
-			'\\WooThemes\\Resources\\Products'      => 'products',
-			'\\WooThemes\\Resources\\Reports'       => 'reports',
-			'\\WooThemes\\Resources\\Webhooks'      => 'webhooks',
+			'\\WIC\\Resources\\Coupons'       => 'coupons',
+			'\\WIC\\Resources\\Custom'        => 'custom',
+			'\\WIC\\Resources\\Customers'     => 'customers',
+			'\\WIC\\Resources\\Index'         => 'index',
+			'\\WIC\\Resources\\Orders'        => 'orders',
+			'\\WIC\\Resources\\OrderNotes'   => 'order_notes',
+			'\\WIC\\Resources\\OrderRefunds' => 'order_refunds',
+			'\\WIC\\Resources\\Products'      => 'products',
+			'\\WIC\\Resources\\Reports'       => 'reports',
+			'\\WIC\\Resources\\Webhooks'      => 'webhooks',
 		);
 
 		foreach ( $resources as $resource_class => $resource_method ) {
@@ -208,7 +208,7 @@ class WC_API_Client {
 	 * as well as forcing SSL for stores that allow it
 	 *
 	 * @since 2.0
-	 * @throws WC_API_Client_Exception
+	 * @throws ClientException
 	 */
 	public function validate_api_url() {
 
@@ -219,12 +219,12 @@ class WC_API_Client {
 		// 1) the store URL is not correct (missing sub-directory path, etc)
 		// 2) pretty permalinks are disabled
 		if ( false === $index ) {
-			throw new WC_API_Client_Exception( sprintf( 'Invalid URL, no WC API found at %s -- ensure your store URL is correct and pretty permalinks are enabled.', $this->api_url ), 404 );
+			throw new ClientException( sprintf( 'Invalid URL, no WC API found at %s -- ensure your store URL is correct and pretty permalinks are enabled.', $this->api_url ), 404 );
 		}
 
 		// older versions of WC (2.0 and under) will simply return a "1"
 		if ( '1' === $index ) {
-			throw new WC_API_Client_Exception( sprintf( 'Please upgrade the WooCommerce version on %s to v2.2 or greater.', $this->api_url ) );
+			throw new ClientException( sprintf( 'Please upgrade the WooCommerce version on %s to v2.2 or greater.', $this->api_url ) );
 		}
 
 		// strip invalid leading/trailing characters from JSON
@@ -236,7 +236,7 @@ class WC_API_Client {
 		// check for invalid JSON, an error here usually means:
 		// 1) there's some garbage in the JSON output, WP Super Cache is notorious for adding an HTML comment to non-cached pages
 		if ( null === $index ) {
-			throw new WC_API_Client_Exception( sprintf( 'WC API found, but JSON is corrupt -- ensure the index at %s is valid JSON.', $this->api_url ) );
+			throw new ClientException( sprintf( 'WC API found, but JSON is corrupt -- ensure the index at %s is valid JSON.', $this->api_url ) );
 		}
 
 		// check if the site URL returned is SSL, but SSL is not enabled
@@ -257,7 +257,7 @@ class WC_API_Client {
 	 * @param string $path request path, e.g. orders/123
 	 * @param array $request_data either query parameters or the request body
 	 * @return object|array object by default
-	 * @throws WC_API_Client_Exception HTTP or authentication errors
+	 * @throws ClientException HTTP or authentication errors
 	 */
 	public function make_api_call( $method, $path, $request_data ) {
 
@@ -275,7 +275,7 @@ class WC_API_Client {
 			)
 		);
 
-		$request = new WC_API_Client_HTTP_Request( $args );
+		$request = new ClientRequest( $args );
 
 		return $request->dispatch();
 	}

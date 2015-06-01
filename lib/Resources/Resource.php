@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes\Resources;
+namespace WIC\Resources;
 /**
  * WC API Client Resource class
  *
@@ -15,7 +15,7 @@ abstract class Resource {
 	/** @var string JSON object namespace */
 	protected $object_namespace;
 
-	/** @var WC_API_Client class instance */
+	/** @var Client class instance */
 	protected $client;
 
 	/** @var string request method, e.g. GET */
@@ -37,7 +37,7 @@ abstract class Resource {
 	 * @since 2.0
 	 * @param string $endpoint top-level endpoint, e.g. `orders`
 	 * @param string $object_namespace the JSON object namespace for this resource, e.g. `order`
-	 * @param WC_API_Client $client class instance
+	 * @param Client $client class instance
 	 */
 	public function __construct( $endpoint, $object_namespace, $client ) {
 

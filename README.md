@@ -28,14 +28,14 @@ $options = array(
 
 try {
 
-	$client = new WC_API_Client( 'http://your-store-url.com', $consumer_key, $consumer_secret, $options );
+	$client = new Client( 'http://your-store-url.com', $consumer_key, $consumer_secret, $options );
 
-} catch ( WC_API_Client_Exception $e ) {
+} catch ( ClientException $e ) {
 
 	echo $e->getMessage() . PHP_EOL;
 	echo $e->getCode() . PHP_EOL;
 
-	if ( $e instanceof WC_API_Client_HTTP_Exception ) {
+	if ( $e instanceof ClientHTTPException ) {
 
 		print_r( $e->get_request() );
 		print_r( $e->get_response() );
@@ -57,7 +57,7 @@ try {
 
 
 ### Error handling
-Exceptions are thrown when errors are encountered, most will be instances of `WC_API_Client_HTTP_Exception` which has two additional methods, `get_request()` and `get_response()` -- these return the request and response objects to help with debugging.
+Exceptions are thrown when errors are encountered, most will be instances of `ClientHTTPException` which has two additional methods, `get_request()` and `get_response()` -- these return the request and response objects to help with debugging.
 
 
 ## Methods

@@ -1,6 +1,6 @@
 <?php
 
-namespace WooThemes\Resources;
+namespace WIC\Resources;
 
 /**
  * WC API Client Orders resource class
@@ -14,7 +14,7 @@ class Orders extends Resource {
 	 * Setup the resource
 	 *
 	 * @since 2.0
-	 * @param WC_API_Client $client class instance
+	 * @param Client $client class instance
 	 */
 	public function __construct( $client ) {
 
