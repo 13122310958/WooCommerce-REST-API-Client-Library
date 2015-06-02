@@ -81,8 +81,17 @@ class ClientAuthentication {
 
 		$base_request_uri = rawurlencode( $this->url );
 
+		if ( isset( $params['filter'] ) ) {
+			$filters = $params['filter'];
+			unset( $params['filter'] );
+			foreach ( $filters as $filter => $filter_value ) {
+				$params['filter[' . $filter . ']'] = $filter_value;
+			}
+		}
+		
 		// normalize parameter key/values and sort them
-		$params = $this->normalize_parameters( $params );
+		// Make a waring if param is an array
+		$params = @$this->normalize_parameters( $params );
 		uksort( $params, 'strcmp' );
 
 		// form query string
