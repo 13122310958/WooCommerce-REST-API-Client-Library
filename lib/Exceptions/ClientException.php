@@ -2,6 +2,7 @@
 
 namespace WIC\Exceptions;
 
+use Exception;
 /**
  * WC API Client Exception class
  *
@@ -9,7 +10,7 @@ namespace WIC\Exceptions;
  *
  * @since 2.0
  */
-class ClientException extends \Exception {
+class ClientException extends Exception {
 
 
 	/**
