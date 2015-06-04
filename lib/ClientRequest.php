@@ -2,6 +2,8 @@
 
 namespace WIC;
 
+use WIC\Exceptions\ClientHTTPException;
+
 /**
  * WC API Client HTTP Request
  *
@@ -187,9 +189,11 @@ class ClientRequest {
 
 		// any non-200/201/202 response code indicates an error
 		if ( ! in_array( $this->response->code, array( '200', '201', '202' ) ) ) {
-
+			if ($this->json_decode_as_array)
+				list( $error_message, $error_code ) = is_array( $parsed_response['errors'] ) ? array( $parsed_response['errors'][0]['message'], $parsed_response['errors'][0]['code'] ) : array( $parsed_response['errors']['message'], $parsed_response['errors']['code'] );
+			else
+				list( $error_message, $error_code ) = is_array( $parsed_response->errors ) ? array( $parsed_response->errors[0]->message, $parsed_response->errors[0]->code ) : array( $parsed_response->errors->message, $parsed_response->errors->code );
 			// error message/code is nested sometimes
-			list( $error_message, $error_code ) = is_array( $parsed_response->errors ) ? array( $parsed_response->errors[0]->message, $parsed_response->errors[0]->code ) : array( $parsed_response->errors->message, $parsed_response->errors->code );
 
 			throw new ClientHTTPException( sprintf( 'Error: %s [%s]', $error_message, $error_code ), $this->response->code, $this->request, $this->response);
 		}
