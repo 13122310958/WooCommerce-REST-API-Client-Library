@@ -5,11 +5,17 @@ WooCommerce REST API PHP Client Library
 
 A PHP wrapper for the WooCommerce REST API. Easily interact with the WooCommerce REST API using this library.
 
-Feedback and bug reports are appreciated.
+Feedback and bug reports are appreciated, and fixed ASAP.
+
+## Installation
+### Via Composer
+``` bash
+$ composer require wic/woocommerce-api
+```
 
 ## Requirements
 
-PHP 5.2.x
+PHP 5.4.x
 cURL
 WooCommerce 2.2 at least on the store
 
@@ -20,10 +26,10 @@ Generate API credentials (Consumer Key & Consumer Secret) under WP Admin > Your 
 ## Setup the library
 
 ```php
-require_once( 'lib/woocommerce-api.php' );
+use WIC/Client;
 
 $options = array(
-	'ssl_verify'      => false,
+    'ssl_verify'      => false,
 );
 
 try {
@@ -75,7 +81,7 @@ Exceptions are thrown when errors are encountered, most will be instances of `Cl
 
 ## Credit
 
-Copyright (c) 2013-2014 - [Gerhard Potgieter](http://gerhardpotgieter.com/), [Max Rice](http://maxrice.com) and other contributors
+Copyright (c) 2013-2015 - [Web In Color](http://www.webincolor.fr), [Gerhard Potgieter](http://gerhardpotgieter.com/), [Max Rice](http://maxrice.com) and other contributors
 
 ## License
 Released under the [GPL3 license](http://www.gnu.org/licenses/gpl-3.0.html)
