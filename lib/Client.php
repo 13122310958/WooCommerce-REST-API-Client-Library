@@ -11,7 +11,7 @@ class Client {
 
 
 	/** API client version */
-	const VERSION = '0.3.0';
+	const VERSION = '0.3.1';
 
 	/** @var string store URL, e.g. http://www.WIC.com */
 	public $store_url;

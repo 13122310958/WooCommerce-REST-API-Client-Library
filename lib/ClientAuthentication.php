@@ -111,7 +111,7 @@ class ClientAuthentication {
 			$secret .= '&';
 		}
 
-		return base64_encode( hash_hmac( self::HASH_ALGORITHM, $string_to_sign, $this->consumer_secret, true ) );
+		return base64_encode( hash_hmac( self::HASH_ALGORITHM, $string_to_sign, $secret, true ) );
 	}
 
 
