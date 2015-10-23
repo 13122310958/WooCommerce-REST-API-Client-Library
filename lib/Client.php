@@ -5,13 +5,13 @@ use WIC\Exceptions\ClientException;
 /**
  * WC API Client
  *
- * @since 2.0
+ * @since 0.1
  */
 class Client {
 
 
 	/** API client version */
-	const VERSION = '2.0.0';
+	const VERSION = '0.3.0';
 
 	/** @var string store URL, e.g. http://www.WIC.com */
 	public $store_url;
@@ -82,12 +82,13 @@ class Client {
 	 * @param string $consumer_secret
 	 * @param array $options client options
 	 */
-	public function __construct( $store_url, $consumer_key, $consumer_secret, $options = array() ) {
+	public function __construct( $store_url, $consumer_key, $consumer_secret, $options = array(), $endpoint = '/wc-api/v3/') {
 
 		// set required info
 		$this->store_url = $store_url;
 		$this->consumer_key = $consumer_key;
 		$this->consumer_secret = $consumer_secret;
+		$this->endpoint = preg_match('/^\/wc-api\/v[2-9]\/$/i', $endpoint) ? strtolower($endpoint) : '/wc-api/v3/';
 
 		// load each API resource
 		$this->init_resources();
@@ -155,7 +156,7 @@ class Client {
 		$path = isset( $url['path'] ) ? rtrim( $url['path'], '/' ) : '';
 
 		// add WC API path
-		$path .= '/wc-api/v3/';
+		$path .= $this->endpoint;
 
 		// build URL
 		$this->api_url = "{$scheme}://{$host}{$path}";

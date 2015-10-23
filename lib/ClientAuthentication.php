@@ -88,7 +88,7 @@ class ClientAuthentication {
 				$params['filter[' . $filter . ']'] = $filter_value;
 			}
 		}
-		
+
 		// normalize parameter key/values and sort them
 		// Make a waring if param is an array
 		$params = @$this->normalize_parameters( $params );
@@ -104,6 +104,12 @@ class ClientAuthentication {
 
 		// form string to sign (first key)
 		$string_to_sign = $http_method . '&' . $base_request_uri . '&' . $query_string;
+		$secret = $this->consumer_secret;
+
+		if (preg_match('/wc-api\/v3/', $this->url)) {
+			// @see https://stackoverflow.com/questions/31976059/woocommerce-api-v3-authentication-issue
+			$secret .= '&';
+		}
 
 		return base64_encode( hash_hmac( self::HASH_ALGORITHM, $string_to_sign, $this->consumer_secret, true ) );
 	}
