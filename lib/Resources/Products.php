@@ -198,6 +198,31 @@ class Products extends Resource {
 		return $this->do_request();
 	}
 
+	/**
+	 * Get a list of product attributes or a single product attribute
+	 *
+	 * GET /products/attributes
+	 * GET /products/attributes/{#id}
+	 *
+	 * @since 2.5
+	 * @param int $id category ID or null to get all product attributes
+	 * @param array $args acceptable product attributes endpoint args
+	 *
+	 * @return array|object product attributes
+	 *
+	 * @author Jonathan Hirardin
+	 */
+	public function get_attributes( $id = null, $args = array() ) {
+
+		$this->set_request_args( array(
+			'method' => 'GET',
+			'path'   => array( 'attributes', $id ),
+			'params' => $args,
+		) );
+
+		return $this->do_request();
+	}
+	
 
 	/** Convenience methods - these do not map directly to an endpoint ********/
 
